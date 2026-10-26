@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureShip CVSS v3.1 calculator</title>
+  <meta name="description" content="CVSS v3.1 base and temporal score calculator. The demonstration service for the SecureShip DevSecOps pipeline.">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="head">
+      <div>
+        <h1>CVSS v3.1 calculator</h1>
+        <p class="muted">Choose a value for each metric, or paste a vector. Scores are calculated by the <code>POST /v1/score</code> API on this server.</p>
+      </div>
+      <p class="muted small" id="version">SecureShip</p>
+    </header>
+
+    <section class="result" aria-live="polite">
+      <div class="score-block">
+        <p class="label">Base score</p>
+        <p class="big" id="base-score">-</p>
+        <p class="sev" id="base-sev">Choose all base metrics</p>
+      </div>
+      <div class="score-block">
+        <p class="label">Temporal score</p>
+        <p class="big" id="temporal-score">-</p>
+        <p class="sev" id="temporal-sev"></p>
+      </div>
+      <dl class="subs">
+        <div><dt>Impact subscore</dt><dd id="impact">-</dd></div>
+        <div><dt>Exploitability subscore</dt><dd id="exploit">-</dd></div>
+      </dl>
+    </section>
+
+    <form id="vector-form" class="vector">
+      <label for="vector">Vector string</label>
+      <div class="vector-row">
+        <input id="vector" name="vector" type="text" spellcheck="false" autocomplete="off" value="CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H">
+        <button type="submit">Score vector</button>
+      </div>
+      <p id="error" class="error" role="alert" hidden></p>
+    </form>
+
+    <div id="metrics" class="metrics"><p class="muted">Loading metric definitions…</p></div>
+
+    <footer class="muted small">
+      <p>Implements the FIRST CVSS v3.1 specification for base and temporal scores. Environmental metrics are not supported. A CVSS score measures technical severity; it is not a measure of risk to your organisation.</p>
+      <p><a href="/healthz">Health check</a></p>
+      <p><a href="/v1/metrics">Metric definitions (JSON)</a></p>
+    </footer>
+  </main>
+</body>
+</html>

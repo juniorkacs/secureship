@@ -1,0 +1,10 @@
+# Render Blueprint: public calculator demo (no API key, so the page can call the API).
+services:
+  - type: web
+    name: secureship
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars:
+      - key: LOG_LEVEL
+        value: info
